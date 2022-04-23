@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/COD"
+        android:title="Cash On Delivery" />
+
+    <item
+        android:id="@+id/Online"
+        android:title="RazorPay" />
+
+
+</menu>

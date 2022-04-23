@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:background="@color/white"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/shopname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:text="From ShopName"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/shopname">
+
+                <TextView
+                    android:id="@+id/distance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo"
+                    android:text="5 km" />
+
+                <TextView
+                    android:id="@+id/bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_centerInParent="true"
+                    android:layout_toRightOf="@id/distance"
+                    android:fontFamily="@font/baloo"
+                    android:text="|" />
+
+                <TextView
+                    android:id="@+id/time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_toRightOf="@id/bar"
+                    android:fontFamily="@font/baloo"
+                    android:text="15 mins" />
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/expand"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_navigate_next_24" />
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/light_grey"
+            android:layout_marginTop="2.5dp"
+            android:layout_marginBottom="2.5dp"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/prodImgRl"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_centerHorizontal="true"
+                android:background="@drawable/map_loc_bg"
+                android:elevation="5dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp">
+
+                <ImageView
+                    android:id="@+id/shopImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/default_image" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/prodDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_below="@id/prodImgRl">
+
+                <TextView
+                    android:id="@+id/Status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/baloo"
+                    android:text="OPEN"
+                    android:textSize="15sp" />
+
+
+                <RelativeLayout
+                    android:id="@+id/Emailinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Status"
+                    android:layout_marginTop="5dp">
+
+                    <ImageView
+                        android:id="@+id/icon1"
+                        android:layout_width="12.5dp"
+                        android:layout_height="12.5dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/em"/>
+
+                    <TextView
+                        android:id="@+id/Email"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-5dp"
+                        android:fontFamily="@font/baloo"
+                        android:text="sawardekar38"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/icon1"
+                        android:layout_marginLeft="5dp"
+                        android:lineSpacingExtra="-7.5dp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Phoneinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Emailinfo"
+                    android:layout_marginTop="2.5dp"
+                    >
+
+                    <ImageView
+                        android:id="@+id/icon2"
+                        android:layout_width="12.5dp"
+                        android:layout_height="12.5dp"
+                        android:src="@drawable/ph"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/Phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-5dp"
+                        android:fontFamily="@font/baloo"
+                        android:text="8108655480"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/icon2"
+                        android:layout_marginLeft="5dp"
+                        android:lineSpacingExtra="-7.5dp"
+                         />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/Delfeeinfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Phoneinfo"
+                    >
+
+                    <ImageView
+                        android:id="@+id/icon3"
+                        android:layout_width="12.5dp"
+                        android:layout_height="12.5dp"
+                        android:src="@drawable/delfee"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/Delfee"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/icon3"
+                        android:fontFamily="@font/baloo"
+                        android:layout_centerVertical="true"
+                        android:text="\u20b950"
+                         />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/shopadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/Delfeeinfo"
+                    >
+
+                    <ImageView
+                        android:id="@+id/icon4"
+                        android:layout_width="12.5dp"
+                        android:layout_height="12.5dp"
+                        android:src="@drawable/shpadd"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/ShopAdd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:lineSpacingExtra="-5dp"
+                        android:layout_toRightOf="@id/icon4"
+                        android:fontFamily="@font/baloo"
+                        android:layout_centerVertical="true"
+                        android:text="shopaddress"
+                        />
+                </RelativeLayout>
+
+            </RelativeLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

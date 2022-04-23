@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1043213241136",
+    "project_id": "grocer-basket",
+    "storage_bucket": "grocer-basket.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1043213241136:android:9b7161eb6ee86ac50316f5",
+        "android_client_info": {
+          "package_name": "com.example.grocerbasket"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1043213241136-chncomk5it2rfpr37vcajqfof2f4l56r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCz0mReCUO_8FRZYukPXRSBcC3t5rkjYl4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1043213241136-chncomk5it2rfpr37vcajqfof2f4l56r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

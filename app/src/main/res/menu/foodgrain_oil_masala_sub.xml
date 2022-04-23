@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dals_pulses"
+        android:title="Dals \u0026 Pulses" />
+    <item
+        android:id="@+id/oil"
+        android:title="Cooking Oil" />
+    <item
+        android:id="@+id/flour"
+        android:title="Flours \u0026 Grains" />
+    <item
+        android:id="@+id/masala"
+        android:title="Masala \u0026 Spices" />
+    <item
+        android:id="@+id/salt_sugr_jaggery"
+        android:title="Salt, Sugar \u0026 Jaggery" />
+
+
+</menu>

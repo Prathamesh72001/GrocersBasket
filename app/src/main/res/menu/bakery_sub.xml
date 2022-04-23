@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dairy"
+        android:title="Dairy" />
+    <item
+        android:id="@+id/breads"
+        android:title="Breads \u0026 Buns" />
+    <item
+        android:id="@+id/rusk"
+        android:title="Cookies,Rusk \u0026 Khari" />
+    <item
+        android:id="@+id/cakes"
+        android:title="Cakes \u0026 Pastries" />
+
+
+</menu>

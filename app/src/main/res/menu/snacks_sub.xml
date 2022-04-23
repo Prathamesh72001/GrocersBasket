@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/choc"
+        android:title="Chocolates \u0026 Candies" />
+    <item
+        android:id="@+id/noodle"
+        android:title="Noodle, Pasta \u0026 Vermicelli" />
+    <item
+        android:id="@+id/biscuits"
+        android:title="Biscuits \u0026 Cookies" />
+    <item
+        android:id="@+id/namkeen"
+        android:title="Snacks \u0026 Namkeen" />
+    <item
+        android:id="@+id/spreads"
+        android:title="Spreads, Sauces \u0026 Ketchup" />
+
+
+
+</menu>

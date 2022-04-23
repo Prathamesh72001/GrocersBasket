@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:padding="15dp"
+    tools:context=".Verification">
+
+
+
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CO\nDE"
+            android:textColor="@color/black"
+            android:fontFamily="@font/bungee"
+            android:textSize="75sp"
+            android:textAlignment="center"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_below="@id/title"
+            android:textColor="@color/black"
+            android:fontFamily="@font/baloo"
+            android:text="Verification"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-55dp"/>
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter One Time Password (OTP) sent on"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:fontFamily="@font/baloo"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/header"/>
+
+    <TextView
+        android:id="@+id/NumberText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8108655480"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:fontFamily="@font/baloo"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/tag"/>
+
+    <com.chaos.view.PinView
+        android:id="@+id/pinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:itemCount="6"
+        app:itemWidth="40dp"
+        app:itemHeight="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/NumberText"
+        android:layout_marginTop="40dp"
+        app:lineColor="@color/black"
+        android:itemBackground="@color/white"
+        style="@style/PinWidget.PinView"
+        android:inputType="number"
+        android:cursorVisible="true"
+        app:cursorColor="@color/black"
+        app:hideLineWhenFilled="true"
+        app:itemRadius="10dp"/>
+
+
+    <RelativeLayout
+        android:id="@+id/Nextbtn"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/pinView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/gen_btn">
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/baloo"
+            android:text="Signup"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

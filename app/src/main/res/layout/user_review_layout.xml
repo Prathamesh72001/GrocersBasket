@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp"
+    android:visibility="visible">
+
+
+    <RelativeLayout
+        android:id="@+id/userDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+        <RelativeLayout
+            android:id="@+id/prodImgRl"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/map_loc_bg"
+            android:elevation="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/productImage_Dashboard"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/default_image"
+                android:layout_centerInParent="true"
+                />
+
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/prodName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2.5dp"
+            android:layout_marginRight="2.5dp"
+            android:fontFamily="@font/baloo"
+            android:text="Name"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/prodImgRl"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/prodRatingRl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/userDetails"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="2.5dp"
+        android:layout_marginLeft="2.5dp">
+        <RatingBar
+            android:id="@+id/prodRating"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:isIndicator="true"
+            android:max="5"
+            android:stepSize=".5"
+            android:theme="@style/ratingBar" />
+
+        <ImageView
+            android:id="@+id/more"
+            android:layout_width="22.5dp"
+            android:layout_height="22.5dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/ic_baseline_more_vert_24"
+            app:tint="@color/black" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Review"
+        android:layout_marginLeft="2.5dp"
+        android:layout_marginRight="2.5dp"
+        android:layout_marginBottom="2.5dp"
+        android:layout_below="@id/prodRatingRl"
+        android:textColor="@color/grey"
+        android:layout_toRightOf="@id/userDetails"
+        android:fontFamily="@font/baloo"
+        android:lineSpacingExtra="-3.5dp"/>
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date"
+        android:layout_marginLeft="2.5dp"
+        android:layout_marginRight="2.5dp"
+        android:layout_marginBottom="2.5dp"
+        android:layout_below="@id/userDetails"
+        android:layout_alignParentRight="true"
+        android:textSize="10sp"
+        android:fontFamily="@font/baloo"
+        android:lineSpacingExtra="-3.5dp"
+        />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/light_grey"
+        android:layout_below="@id/date"/>
+
+</RelativeLayout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Welcome_To_Login_Signup"
+    android:background="@color/white">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/WelcomeAnim"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="50dp"
+        android:layout_centerHorizontal="true"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/grocery"/>
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/WelcomeAnim"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="@font/bungee"
+        android:gravity="center_horizontal"
+        android:lineSpacingExtra="5dp"
+        android:text="Save\nYour Precious\nTime"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="27sp" />
+
+    <TextView
+        android:layout_centerHorizontal="true"
+        android:id="@+id/tagline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:gravity="center_horizontal"
+        android:text="Fresh from the farm right at your doorstep."
+        android:fontFamily="@font/baloo"
+        android:textSize="12sp"
+        android:layout_below="@id/title"
+        android:layout_marginTop="-15dp"
+        android:textColor="@color/grey"
+        />
+
+    <RelativeLayout
+        android:id="@+id/Loginbtn"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:background="@drawable/gen_btn"
+        android:layout_below="@id/tagline"
+        android:layout_margin="30dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Login"
+            android:fontFamily="@font/baloo"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/Signupbtn"
+        android:layout_width="125dp"
+        android:layout_height="50dp"
+        android:background="@drawable/gen_btn"
+        android:layout_below="@id/tagline"
+        android:layout_margin="30dp"
+        android:layout_alignParentRight="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Sign Up"
+            android:fontFamily="@font/baloo"
+            android:layout_centerInParent="true"
+            android:textSize="20sp"/>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Login">
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/content_bg"
+        android:padding="10dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/baloo"
+            android:text="My Profile"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="17.5sp" />
+
+    </RelativeLayout>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/relativeLayout2"
+        android:scrollbars="none">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/InfoLayout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@drawable/menu_header_bg">
+
+
+                <ImageView
+                    android:id="@+id/ShopImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp" />
+
+                <RelativeLayout
+                    android:id="@+id/Add_shop_img_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <ImageView
+                        android:id="@+id/camera_ic"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/ic_baseline_camera_alt_24" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_toRightOf="@id/camera_ic"
+                        android:fontFamily="@font/bungee"
+                        android:text="Add Shop Photo"
+                        android:textColor="@color/white"
+                        android:textSize="18sp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/sellerImg"
+                android:layout_width="135dp"
+                android:layout_height="135dp"
+                android:layout_below="@id/InfoLayout"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="-75dp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/sellerProfile"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/user_profile"
+                    android:elevation="1dp"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/user_profile" />
+
+                <RelativeLayout
+                    android:id="@+id/chngprofilepic"
+                    android:layout_width="32.5dp"
+                    android:layout_height="32.5dp"
+                    android:layout_alignRight="@id/sellerProfile"
+                    android:layout_alignBottom="@id/sellerProfile"
+                    android:background="@drawable/profile_chng_bg"
+                    android:elevation="8dp"
+                    android:transitionName="ProfilePhoto">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_baseline_camera_alt_24" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/seller_shop_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/sellerImg"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="5dp"
+                android:fontFamily="@font/baloo"
+                android:text="Shop name"
+                android:textColor="@color/black"
+                android:textSize="22.5sp" />
+
+            <ImageView
+                android:id="@+id/edit_ic"
+                android:layout_width="22.5dp"
+                android:layout_height="22.5dp"
+                android:layout_below="@id/sellerImg"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_toRightOf="@id/seller_shop_name"
+                android:src="@drawable/edit"
+                app:tint="@color/orange" />
+
+            <TextView
+                android:id="@+id/seller_phone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seller_shop_name"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloo"
+                android:text="9108655480"
+                android:textColor="@color/grey"
+                android:textSize="15sp" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/isShopOpen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/seller_phone"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/baloo"
+                android:text="Shop Open" />
+
+            <RelativeLayout
+                android:id="@+id/User_loc_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/isShopOpen"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/seller_map_bg">
+
+                <ImageView
+                    android:id="@+id/location_ic"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="20dp"
+                    android:src="@drawable/delivery_add"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/UserLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@id/edit_ic1"
+                    android:layout_toRightOf="@id/location_ic"
+                    android:fontFamily="@font/baloo"
+                    android:lineSpacingExtra="3.5dp"
+                    android:text="Swagath Rd-Tilaknagar,Banglore-560041"
+                    android:textColor="@color/white"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:id="@+id/edit_ic1"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/edit"
+                    app:tint="@color/white" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/User_loc_Layout"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/my_orders"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/order_ic"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/order"
+                        app:tint="@color/grey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/order_ic"
+                        android:fontFamily="@font/baloo"
+                        android:text="My Delivery Orders"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/light_grey" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/my_notify"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/notify_ic"
+                        android:layout_width="30dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/notification"
+                        app:tint="@color/grey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/notify_ic"
+                        android:fontFamily="@font/baloo"
+                        android:text="Notifications"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/light_grey" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/my_loc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/loc_ic"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/delivery_add"
+                        app:tint="@color/grey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/loc_ic"
+                        android:fontFamily="@font/baloo"
+                        android:text="My Shop Address"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/divider4"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="@color/light_grey" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/logout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/logout_ic"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_margin="20dp"
+                        android:src="@drawable/out"
+                        app:tint="@color/grey" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@id/logout_ic"
+                        android:fontFamily="@font/baloo"
+                        android:text="Logout"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp" />
+
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/progressbar_bg"
+                android:elevation="8dp"
+                android:visibility="gone">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/loading_circle" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

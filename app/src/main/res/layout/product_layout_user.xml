@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="160dp"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    app:cardElevation="2.5dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="15dp"
+    app:cardCornerRadius="7.5dp">
+
+    <RelativeLayout
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:background="@drawable/favourite_bg_2"
+        android:elevation="5dp"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="5dp">
+        <ImageView
+            android:id="@+id/uncheck_fvrt"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_baseline_favorite_border_24"
+            android:layout_centerInParent="true"
+            app:tint="@color/white" />
+
+        <ImageView
+            android:id="@+id/check_fvrt"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/ic_baseline_favorite_24"
+            android:layout_centerInParent="true"
+            app:tint="@color/white"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="5dp">
+
+        <RelativeLayout
+            android:id="@+id/prodImgRl"
+            android:layout_width="160dp"
+            android:layout_height="140dp"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:background="@drawable/map_loc_bg"
+            android:elevation="5dp"
+            >
+
+            <ImageView
+                android:id="@+id/productImage_Dashboard"
+                android:layout_width="140dp"
+                android:layout_height="140dp"
+                android:src="@drawable/default_image"
+                android:layout_centerVertical="true"
+                />
+
+            <RelativeLayout
+                android:id="@+id/outOfStockRl_Dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_margin="20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/out_of_stock_bg"
+                android:visibility="gone">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="out of stock"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/baloo"
+                    android:textColor="@color/black"
+                    android:textAllCaps="true"
+                    android:textSize="10sp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/discountRl_Dashboard"
+                android:layout_width="30dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/discount_bg_2"
+                android:padding="5dp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:id="@+id/discount_Dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:fontFamily="@font/baloo"
+                        android:text="0%"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/discount_Dashboard"
+                        android:layout_marginTop="-5dp"
+                        android:fontFamily="@font/baloo"
+                        android:text="OFF"
+                        android:textColor="@color/white"
+                        android:textSize="8sp" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/AddBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/map_loc_bg"
+            android:elevation="7.5dp"
+            android:transitionName="search_bar">
+
+            <ImageView
+                android:id="@+id/plusIcon"
+                android:layout_width="22.5dp"
+                android:layout_height="22.5dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_baseline_add_24"
+                app:tint="@color/orange" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/quantitylayout"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="5dp"
+            android:background="@drawable/map_loc_bg"
+            android:backgroundTint="@color/orange"
+            android:elevation="7.5dp"
+            android:visibility="gone"
+            android:transitionName="search_bar">
+
+            <ImageView
+                android:id="@+id/plus"
+                android:layout_width="22.5dp"
+                android:layout_height="22.5dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="5dp"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_baseline_add_24"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/quan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/baloo"
+                android:text="1"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+
+            <ImageView
+                android:id="@+id/minu"
+                android:layout_width="20dp"
+                android:layout_height="22.5dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/ic_baseline_horizontal_rule_24"
+                app:tint="@color/white" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/prodImgRl"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="10dp">
+
+            <TextView
+                android:id="@+id/prodName_Dashboard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/baloo"
+                android:lineSpacingExtra="-5dp"
+                android:text="Product Name"
+                android:textSize="13sp"
+                android:textAllCaps="true"
+                android:textColor="@color/black" />
+
+            <RelativeLayout
+                android:id="@+id/Quantity"
+                android:layout_width="50dp"
+                android:layout_height="25dp"
+                android:layout_below="@id/prodName_Dashboard"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:background="@drawable/country_code_bg">
+
+                <TextView
+                    android:id="@+id/prodQuanity_Dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:fontFamily="@font/baloo"
+                    android:text="0g"
+                    android:textSize="12sp" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/Prices"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/Quantity"
+                android:orientation="horizontal"
+
+                >
+
+                <RelativeLayout
+                    android:id="@+id/DiscountPrice_Dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingRight="10dp">
+
+                    <TextView
+                        android:id="@+id/rupeesign1_Dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/baloo"
+                        android:text="\u20b9"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/discountPrice_Dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/rupeesign1_Dashboard"
+                        android:fontFamily="@font/baloo"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/ProdPrice_Dashboard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:paddingRight="10dp"
+
+                    >
+
+                    <TextView
+                        android:id="@+id/rupeesign2_Dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/baloo"
+                        android:text="\u20b9"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/productPrice_Dashboard"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/rupeesign2_Dashboard"
+                        android:fontFamily="@font/baloo"
+                        android:text="0"
+                        android:textColor="@color/black"
+                        android:textSize="15sp" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

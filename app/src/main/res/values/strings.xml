@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Grocer\u0027s Basket</string>
+    <string name="oops_we_are_not_able_to_connect">Oops! We are not able to connect.</string>
+    <string name="please_check_your_internet_connection">Please check your internet connection.</string>
+    <string name="try_again">Try Again</string>
+    <string name="already_have_an_account_login">Already have an Account ? Login</string>
+    <string name="next">Next</string>
+    <string name="email">Email</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

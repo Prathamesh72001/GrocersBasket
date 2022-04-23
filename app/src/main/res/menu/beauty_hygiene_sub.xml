@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/skin_care"
+        android:title="Skin Care" />
+    <item
+        android:id="@+id/hair_care"
+        android:title="Hair Care" />
+    <item
+        android:id="@+id/deos"
+        android:title="Fragrances \u0026 Deos" />
+    <item
+        android:id="@+id/bath"
+        android:title="Bath \u0026 Hand Wash" />
+    <item
+        android:id="@+id/feminine_hygiene"
+        android:title="Feminine Hygiene" />
+    <item
+        android:id="@+id/oral"
+        android:title="Oral Care" />
+    <item
+        android:id="@+id/men_groom"
+        android:title="Men's Grooming" />
+
+
+</menu>

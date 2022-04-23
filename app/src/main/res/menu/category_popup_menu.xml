@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/fruits"
+        android:title="Fruits \u0026 Vegetables" />
+    <item
+        android:id="@+id/beverages"
+        android:title="Beverages" />
+    <item
+        android:id="@+id/foodgrains"
+        android:title="Foodgrains, Oil \u0026 Masala" />
+    <item
+        android:id="@+id/bakery"
+        android:title="Bakery, Cakes \u0026 Diary" />
+    <item
+        android:id="@+id/snacks"
+        android:title="Snacks \u0026 Branded Foods" />
+    <item
+        android:id="@+id/hygiene"
+        android:title="Beauty \u0026 Hygiene" />
+    <item
+        android:id="@+id/cleaning"
+        android:title="Cleaning \u0026 Household" />
+
+
+
+</menu>
