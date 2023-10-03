@@ -65,7 +65,7 @@ public class UserReviewadapter extends RecyclerView.Adapter<UserReviewadapter.Us
         //Set Data
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(Long.parseLong(timeStamp));
-        String dateForm = DateFormat.format("dd/MM/yyyy", calendar).toString();
+        String dateForm = DateFormat.format("dd/MM/yyyy HH:mm A", calendar).toString();
         holder.date.setText(dateForm);
 
         holder.review.setText(review);

@@ -320,7 +320,10 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsAdapter
                     public boolean onMenuItemClick(MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.COD:
-
+                                payTxt.setText(item.getTitle().toString());
+                                payOp = payTxt.getText().toString();
+                                isPayOptionSelected = true;
+                                break;
                             case R.id.Online:
                                 payTxt.setText(item.getTitle().toString());
                                 int amount = Math.round(Float.parseFloat(finalcost) * 100);

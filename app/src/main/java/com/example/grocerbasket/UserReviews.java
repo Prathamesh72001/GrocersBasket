@@ -2,6 +2,7 @@ package com.example.grocerbasket;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
@@ -51,6 +52,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -61,7 +63,8 @@ public class UserReviews extends AppCompatActivity implements NavigationView.OnN
     NavigationView navigationView;
     BottomNavigationView bottomNavigationView;
     String firstname, phoneNo, forWhom;
-    RelativeLayout login_or_signup_btn, location, contentView;
+    RelativeLayout login_or_signup_btn, location;
+    ConstraintLayout contentView;
     View header;
     Menu menu1;
     static final float END_SCALE = 0.7f;
@@ -195,7 +198,7 @@ public class UserReviews extends AppCompatActivity implements NavigationView.OnN
         UsersessionManager = new SessionManager(this, SessionManager.SESSION_USER);
         HashMap<String, String> userDetails = UsersessionManager.getUserDetailFromSession();
         String phoneno = userDetails.get(SessionManager.KEY_PHONENO);
-        reviewHelperClasses=new ArrayList<>();
+        reviewHelperClasses=new ArrayList<ReviewHelperClass>();
         FirebaseDatabase.getInstance().getReference("User Reviews").child(phoneno).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -205,7 +208,7 @@ public class UserReviews extends AppCompatActivity implements NavigationView.OnN
                         ReviewHelperClass reviewHelperClass=ds.getValue(ReviewHelperClass.class);
                         reviewHelperClasses.add(reviewHelperClass);
                     }
-                    reviewAdapter = new UserReviewadapter(UserReviews.this, reviewHelperClasses);
+                    reviewAdapter = new UserReviewadapter(UserReviews.this, reverseArrayList(reviewHelperClasses));
                     reviewRecycler.setAdapter(reviewAdapter);
                 }
             }
@@ -215,6 +218,20 @@ public class UserReviews extends AppCompatActivity implements NavigationView.OnN
 
             }
         });
+    }
+
+    public ArrayList<ReviewHelperClass> reverseArrayList(ArrayList<ReviewHelperClass> alist)
+    {
+        // Arraylist for storing reversed elements
+        ArrayList<ReviewHelperClass> revArrayList = new ArrayList<ReviewHelperClass>();
+        for (int i = alist.size() - 1; i >= 0; i--) {
+
+            // Append the elements in reverse order
+            revArrayList.add(alist.get(i));
+        }
+
+        // Return the reversed arraylist
+        return revArrayList;
     }
 
     private void CloseDrawer() {

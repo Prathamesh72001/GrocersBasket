@@ -875,7 +875,7 @@ public class Product_Details extends AppCompatActivity implements NavigationView
                         count=count+1;
                     }
                     no_of_reviews.setText(String.valueOf(snapshot.getChildrenCount()));
-                    reviewAdapter = new ReviewAdapter(Product_Details.this, reviewHelperClasses);
+                    reviewAdapter = new ReviewAdapter(Product_Details.this,reverseArrayList(reviewHelperClasses));
                     reviewRecycler.setAdapter(reviewAdapter);
                 }
             }
@@ -885,6 +885,20 @@ public class Product_Details extends AppCompatActivity implements NavigationView
 
             }
         });
+    }
+
+    public ArrayList<ReviewHelperClass> reverseArrayList(ArrayList<ReviewHelperClass> alist)
+    {
+        // Arraylist for storing reversed elements
+        ArrayList<ReviewHelperClass> revArrayList = new ArrayList<ReviewHelperClass>();
+        for (int i = alist.size() - 1; i >= 0; i--) {
+
+            // Append the elements in reverse order
+            revArrayList.add(alist.get(i));
+        }
+
+        // Return the reversed arraylist
+        return revArrayList;
     }
 
     private void inputData() {
