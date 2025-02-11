@@ -168,27 +168,22 @@ public class Show_Products extends AppCompatActivity implements NavigationView.O
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_bot_home:
-                        startActivity(new Intent(Show_Products.this, Dashboard.class));
-                        finishAffinity();
-                        break;
+                int id=item.getItemId();
+                if(id==R.id.nav_bot_home){
+                    startActivity(new Intent(Show_Products.this, Dashboard.class));
+                    finishAffinity();
+                }else if(id==R.id.nav_bot_cat){
+                    startActivity(new Intent(Show_Products.this,Categories.class));
 
-                    case R.id.nav_bot_cat:
-                        startActivity(new Intent(Show_Products.this,Categories.class));
-                        break;
+                }else if(id==R.id.nav_bot_search){
+                    startActivity(new Intent(Show_Products.this, SearchProduct.class));
 
-                    case R.id.nav_bot_search:
-                        startActivity(new Intent(Show_Products.this, SearchProduct.class));
-                        break;
+                }else if(id==R.id.nav_bot_list){
+                    startActivity(new Intent(Show_Products.this,FavouriteActivity.class));
 
-                    case R.id.nav_bot_list:
-                        startActivity(new Intent(Show_Products.this,FavouriteActivity.class));
-                        break;
+                }else if(id==R.id.nav_bot_basket){
+                    startActivity(new Intent(Show_Products.this,CartActivity.class));
 
-                    case R.id.nav_bot_basket:
-                        startActivity(new Intent(Show_Products.this,CartActivity.class));
-                        break;
                 }
                 return false;
             }
@@ -372,50 +367,38 @@ public class Show_Products extends AppCompatActivity implements NavigationView.O
     //Navigation Func
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                startActivity(new Intent(Show_Products.this, Dashboard.class));
-                finishAffinity();
-                break;
+        int id=item.getItemId();
+        if(id==R.id.nav_home){
+            startActivity(new Intent(Show_Products.this, Dashboard.class));
+            finishAffinity();
+        }else if(id==R.id.nav_profile){
+            Intent profile_intent;
+            if (forWhom.equalsIgnoreCase("forUser")) {
+                profile_intent = new Intent(Show_Products.this, UserProfile.class);
+            } else {
+                profile_intent = new Intent(Show_Products.this, SellerProfile.class);
+            }
+            startActivity(profile_intent);
+        }else if(id==R.id.nav_settings){
+            startActivity(new Intent(Show_Products.this,Settings.class));
+        }else if(id==R.id.nav_logout){
+            SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_profile:
-                Intent profile_intent;
-                if (forWhom.equalsIgnoreCase("forUser")) {
-                    profile_intent = new Intent(Show_Products.this, UserProfile.class);
-                } else {
-                    profile_intent = new Intent(Show_Products.this, SellerProfile.class);
-                }
-                startActivity(profile_intent);
-                break;
+            SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
+            sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
 
-            case R.id.nav_settings:
-                startActivity(new Intent(Show_Products.this,Settings.class));
-                break;
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(Show_Products.this, Dashboard.class);
+            startActivity(logout_intent);
+            finishAffinity();
+        }else if(id==R.id.nav_category){
+            startActivity(new Intent(Show_Products.this,Categories.class));
 
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
+        }else if(id==R.id.nav_basket){
+            startActivity(new Intent(Show_Products.this,CartActivity.class));
 
-                SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
-                sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(Show_Products.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
-
-            case R.id.nav_category:
-                startActivity(new Intent(Show_Products.this,Categories.class));
-                break;
-
-            case R.id.nav_aboutus:
-                break;
-
-            case R.id.nav_basket:
-                startActivity(new Intent(Show_Products.this,CartActivity.class));
-                break;
         }
         return true;
     }

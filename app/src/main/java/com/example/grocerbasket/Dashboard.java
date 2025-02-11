@@ -209,25 +209,19 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_bot_home:
-                        break;
+                int id=item.getItemId();
+                if(id==R.id.nav_bot_basket){
+                    startActivity(new Intent(Dashboard.this, CartActivity.class));
 
-                    case R.id.nav_bot_cat:
-                        startActivity(new Intent(Dashboard.this,Categories.class));
-                        break;
+                }else if(id==R.id.nav_bot_cat){
+                    startActivity(new Intent(Dashboard.this,Categories.class));
 
-                    case R.id.nav_bot_search:
-                        startActivity(new Intent(Dashboard.this, SearchProduct.class));
-                        break;
+                }else if(id==R.id.nav_bot_search){
+                    startActivity(new Intent(Dashboard.this, SearchProduct.class));
 
-                    case R.id.nav_bot_list:
-                        startActivity(new Intent(Dashboard.this, FavouriteActivity.class));
-                        break;
+                }else if(id==R.id.nav_bot_list){
+                    startActivity(new Intent(Dashboard.this, FavouriteActivity.class));
 
-                    case R.id.nav_bot_basket:
-                        startActivity(new Intent(Dashboard.this, CartActivity.class));
-                        break;
                 }
                 return false;
             }
@@ -698,49 +692,36 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     //Navigation Func
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                CloseDrawer();
-                break;
+        int id=item.getItemId();
+        if(id==R.id.nav_home){
+            CloseDrawer();
+        }else if(id==R.id.nav_profile){
+            if (forWhom.equalsIgnoreCase("forUser")) {
+                Intent profile_intent = new Intent(Dashboard.this, UserProfile.class);
+                startActivity(profile_intent);
+            } else {
+                Intent profile_intent = new Intent(Dashboard.this, SellerProfile.class);
+                startActivity(profile_intent);
+            }
+        }else if(id==R.id.nav_settings){
+            startActivity(new Intent(Dashboard.this,Settings.class));
+        }else if(id==R.id.nav_logout){
+            SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_profile:
-                if (forWhom.equalsIgnoreCase("forUser")) {
-                    Intent profile_intent = new Intent(Dashboard.this, UserProfile.class);
-                    startActivity(profile_intent);
-                } else {
-                    Intent profile_intent = new Intent(Dashboard.this, SellerProfile.class);
-                    startActivity(profile_intent);
-                }
-                break;
+            SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
+            sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
 
-            case R.id.nav_settings:
-                startActivity(new Intent(Dashboard.this,Settings.class));
-                break;
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(Dashboard.this, Dashboard.class);
+            startActivity(logout_intent);
+            finishAffinity();
+        }else if(id==R.id.nav_category){
+            startActivity(new Intent(Dashboard.this,Categories.class));
 
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
-
-                SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
-                sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(Dashboard.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
-
-            case R.id.nav_category:
-                startActivity(new Intent(Dashboard.this,Categories.class));
-                break;
-
-            case R.id.nav_aboutus:
-                break;
-
-            case R.id.nav_basket:
-                startActivity(new Intent(Dashboard.this, CartActivity.class));
-                break;
+        }else if(id==R.id.nav_basket){
+            startActivity(new Intent(Dashboard.this, CartActivity.class));
         }
         return true;
     }

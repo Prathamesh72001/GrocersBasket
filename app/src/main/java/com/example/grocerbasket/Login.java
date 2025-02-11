@@ -147,14 +147,11 @@ public class Login extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.nav_user:
-                                signup_as_text.setText("User");
-                                break;
-
-                            case R.id.nav_seller:
-                                signup_as_text.setText("Seller");
-                                break;
+                        int id=item.getItemId();
+                        if(id==R.id.nav_user){
+                            signup_as_text.setText("User");
+                        }else if(id==R.id.nav_seller){
+                            signup_as_text.setText("Seller");
                         }
                         return false;
                     }

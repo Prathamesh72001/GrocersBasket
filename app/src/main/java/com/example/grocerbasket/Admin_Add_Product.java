@@ -120,23 +120,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.fruit_and_vegetables:
-
-                            case R.id.beverages:
-
-                            case R.id.foodgrains:
-
-                            case R.id.bakery:
-
-                            case R.id.hygiene:
-
-                            case R.id.cleaning:
-
-                            case R.id.snacks:
-                                cat_text.setText(item.getTitle().toString());
-                                break;
-                        }
+                        cat_text.setText(item.getTitle().toString());
                         return false;
                     }
                 });
@@ -154,13 +138,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.fresh_fruits:
-                                case R.id.veg:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -170,15 +148,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.tea:
-                                case R.id.coffee:
-                                case R.id.health:
-                                case R.id.juices_drinks:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -188,16 +158,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.dals_pulses:
-                                case R.id.oil:
-                                case R.id.flour:
-                                case R.id.masala:
-                                case R.id.salt_sugr_jaggery:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -207,15 +168,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.dairy:
-                                case R.id.breads:
-                                case R.id.rusk:
-                                case R.id.cakes:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -226,16 +179,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.choc:
-                                case R.id.noodle:
-                                case R.id.biscuits:
-                                case R.id.namkeen:
-                                case R.id.spreads:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -246,18 +190,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.skin_care:
-                                case R.id.hair_care:
-                                case R.id.deos:
-                                case R.id.bath:
-                                case R.id.feminine_hygiene:
-                                case R.id.oral:
-                                case R.id.men_groom:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -268,14 +201,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem item) {
-                            switch (item.getItemId()) {
-                                case R.id.detergent_dishwash:
-                                case R.id.cleaners:
-                                case R.id.repellent_freshener:
-                                    subcat_text.setText(item.getTitle().toString());
-                                    break;
-
-                            }
+                            subcat_text.setText(item.getTitle().toString());
                             return false;
                         }
                     });
@@ -708,27 +634,23 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_add:
-                CloseDrawer();
-                break;
+        int id=item.getItemId();
+        if(id==R.id.nav_add){
+            CloseDrawer();
+        }
+        else if(id==R.id.nav_home){
+            startActivity(new Intent(Admin_Add_Product.this,Admin_Show_Product.class));
+            finishAffinity();
+        }else if(id==R.id.nav_logout){
+            SessionManager sessionManager1 = new SessionManager(Admin_Add_Product.this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_home:
-                startActivity(new Intent(Admin_Add_Product.this,Admin_Show_Product.class));
-                finishAffinity();
-                break;
-
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(Admin_Add_Product.this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(Admin_Add_Product.this, Dashboard.class);
-                FirebaseAuth.getInstance().signOut();
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(Admin_Add_Product.this, Dashboard.class);
+            FirebaseAuth.getInstance().signOut();
+            startActivity(logout_intent);
+            finishAffinity();
         }
         return true;
     }

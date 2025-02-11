@@ -141,29 +141,19 @@ public class Categories extends AppCompatActivity implements NavigationView.OnNa
             @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_bot_home:
-                        startActivity(new Intent(Categories.this, Dashboard.class));
-                        finishAffinity();
-                        break;
-
-                    case R.id.nav_bot_cat:
-                        break;
-
-                    case R.id.nav_bot_search:
-                        startActivity(new Intent(Categories.this, SearchProduct.class));
-                        finish();
-                        break;
-
-                    case R.id.nav_bot_list:
-                        startActivity(new Intent(Categories.this,FavouriteActivity.class));
-                        finish();
-                        break;
-
-                    case R.id.nav_bot_basket:
-                        startActivity(new Intent(Categories.this,CartActivity.class));
-                        finish();
-                        break;
+                int id=item.getItemId();
+                if(id==R.id.nav_bot_home){
+                    startActivity(new Intent(Categories.this, Dashboard.class));
+                    finishAffinity();
+                }else if(id==R.id.nav_bot_search){
+                    startActivity(new Intent(Categories.this, SearchProduct.class));
+                    finish();
+                }else if(id==R.id.nav_bot_list){
+                    startActivity(new Intent(Categories.this,FavouriteActivity.class));
+                    finish();
+                }else if(id==R.id.nav_bot_basket){
+                    startActivity(new Intent(Categories.this,CartActivity.class));
+                    finish();
                 }
                 return false;
             }
@@ -346,51 +336,39 @@ public class Categories extends AppCompatActivity implements NavigationView.OnNa
     //Navigation Func
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                startActivity(new Intent(Categories.this, Dashboard.class));
-                finishAffinity();
-                break;
+        int id=item.getItemId();
+        if(id==R.id.nav_home){
+            startActivity(new Intent(Categories.this, Dashboard.class));
+            finishAffinity();
+        }else if(id==R.id.nav_profile){
+            Intent profile_intent;
+            if (forWhom.equalsIgnoreCase("forUser")) {
+                profile_intent = new Intent(Categories.this, UserProfile.class);
+            } else {
+                profile_intent = new Intent(Categories.this, SellerProfile.class);
+            }
+            startActivity(profile_intent);
+        }else if(id==R.id.nav_settings){
+            startActivity(new Intent(Categories.this,Settings.class));
 
-            case R.id.nav_profile:
-                Intent profile_intent;
-                if (forWhom.equalsIgnoreCase("forUser")) {
-                    profile_intent = new Intent(Categories.this, UserProfile.class);
-                } else {
-                    profile_intent = new Intent(Categories.this, SellerProfile.class);
-                }
-                startActivity(profile_intent);
-                break;
+        }else if(id==R.id.nav_logout){
+            SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_settings:
-                startActivity(new Intent(Categories.this,Settings.class));
-                break;
+            SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
+            sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
 
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(Categories.this, Dashboard.class);
+            startActivity(logout_intent);
+            finishAffinity();
+        }else if(id==R.id.nav_category){
+            CloseDrawer();
 
-                SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
-                sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(Categories.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
-
-            case R.id.nav_category:
-                CloseDrawer();
-                break;
-
-            case R.id.nav_aboutus:
-                break;
-
-            case R.id.nav_basket:
-                startActivity(new Intent(Categories.this,CartActivity.class));
-                finish();
-                break;
+        }else if(id==R.id.nav_basket){
+            startActivity(new Intent(Categories.this,CartActivity.class));
+            finish();
         }
         return true;
     }

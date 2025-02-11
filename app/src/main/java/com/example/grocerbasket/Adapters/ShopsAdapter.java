@@ -318,32 +318,29 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsAdapter
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.COD:
-                                payTxt.setText(item.getTitle().toString());
-                                payOp = payTxt.getText().toString();
-                                isPayOptionSelected = true;
-                                break;
-                            case R.id.Online:
-                                payTxt.setText(item.getTitle().toString());
-                                int amount = Math.round(Float.parseFloat(finalcost) * 100);
-                                payOp = payTxt.getText().toString();
-                                isPayOptionSelected = true;
-                                Checkout checkout=new Checkout();
-                                checkout.setKeyID("rzp_test_ngxCkqNNDrbuYw");
-                                JSONObject jsonObject=new JSONObject();
-                                try{
-                                    jsonObject.put("amount",amount);
-                                    jsonObject.put("name","Grocer'sBascket");
-                                    jsonObject.put("description","Order Payment");
-                                    jsonObject.put("prefill.contact",phoneno);
-                                    jsonObject.put("prefill.email",email);
-                                    checkout.open((Activity) context, jsonObject);
-                                }catch (JSONException e){
-                                    e.printStackTrace();
-                                }
-                                break;
-
+                        int id=item.getItemId();
+                        if(id==R.id.COD){
+                            payTxt.setText(item.getTitle().toString());
+                            payOp = payTxt.getText().toString();
+                            isPayOptionSelected = true;
+                        }else if(id==R.id.Online){
+                            payTxt.setText(item.getTitle().toString());
+                            int amount = Math.round(Float.parseFloat(finalcost) * 100);
+                            payOp = payTxt.getText().toString();
+                            isPayOptionSelected = true;
+                            Checkout checkout=new Checkout();
+                            checkout.setKeyID("rzp_test_ngxCkqNNDrbuYw");
+                            JSONObject jsonObject=new JSONObject();
+                            try{
+                                jsonObject.put("amount",amount);
+                                jsonObject.put("name","Grocer'sBascket");
+                                jsonObject.put("description","Order Payment");
+                                jsonObject.put("prefill.contact",phoneno);
+                                jsonObject.put("prefill.email",email);
+                                checkout.open((Activity) context, jsonObject);
+                            }catch (JSONException e){
+                                e.printStackTrace();
+                            }
                         }
                         return false;
                     }

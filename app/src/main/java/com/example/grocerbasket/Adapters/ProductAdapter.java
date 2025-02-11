@@ -200,7 +200,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductA
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder=new androidx.appcompat.app.AlertDialog.Builder(context,R.style.Theme_AppCompat_Dialog);
+                AlertDialog.Builder builder=new androidx.appcompat.app.AlertDialog.Builder(context, androidx.appcompat.R.style.Theme_AppCompat_Dialog);
                 builder.setTitle("Delete").setMessage("Are you sure you want to delete this product ?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override

@@ -41,21 +41,22 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class AdminShowOrderedProducts extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class AdminShowOrderedProducts extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageView menu,profile;
-    RelativeLayout contentView,login_or_signup_btn,location;
+    ImageView menu, profile;
+    RelativeLayout contentView, login_or_signup_btn, location;
     static final float END_SCALE = 0.7f;
     ArrayList<OrderHelperClass> orderHelperClasses;
     OrderAdpter orderAdapter;
     RecyclerView recyclerView;
     SessionManager SellersessionManager;
-    String firstname,phoneNo,forWhom;
+    String firstname, phoneNo, forWhom;
     View header;
-    TextView header_text,header_userLoctext;
+    TextView header_text, header_userLoctext;
     Menu menu1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,12 +64,12 @@ public class AdminShowOrderedProducts extends AppCompatActivity implements Navig
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         //hooks
-        contentView=findViewById(R.id.contentView);
+        contentView = findViewById(R.id.contentView);
         drawerLayout = findViewById(R.id.drawerlayout);
-        navigationView=findViewById(R.id.navigation_view);
-        menu=findViewById(R.id.menu);
-        recyclerView=findViewById(R.id.recyclerView);
-        profile=findViewById(R.id.profile);
+        navigationView = findViewById(R.id.navigation_view);
+        menu = findViewById(R.id.menu);
+        recyclerView = findViewById(R.id.recyclerView);
+        profile = findViewById(R.id.profile);
 
         //mathods
         loadOrders();
@@ -171,13 +172,13 @@ public class AdminShowOrderedProducts extends AppCompatActivity implements Navig
         HashMap<String, String> userDetails = SellersessionManager.getSellerDetailFromSession();
         phoneNo = userDetails.get(SessionManager.KEY_SELLERPHONENO);
 
-        orderHelperClasses=new ArrayList<>();
+        orderHelperClasses = new ArrayList<>();
         //get All Products
         FirebaseDatabase.getInstance().getReference("Orders").orderByChild("orderto").equalTo(phoneNo).addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()) {
+                if (snapshot.exists()) {
                     orderHelperClasses.clear();
                     for (DataSnapshot ds : snapshot.getChildren()) {
                         OrderHelperClass orderHelperClass = ds.getValue(OrderHelperClass.class);
@@ -252,25 +253,20 @@ public class AdminShowOrderedProducts extends AppCompatActivity implements Navig
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                CloseDrawer();
-                break;
+        int id = item.getItemId();
+        if (id == R.id.nav_home) {
+            CloseDrawer();
+        } else if (id == R.id.nav_logout) {
+            SessionManager sessionManager1 = new SessionManager(AdminShowOrderedProducts.this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(AdminShowOrderedProducts.this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(AdminShowOrderedProducts.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
-
-            case R.id.nav_profile:
-                startActivity(new Intent(AdminShowOrderedProducts.this, SellerProfile.class));
-
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(AdminShowOrderedProducts.this, Dashboard.class);
+            startActivity(logout_intent);
+            finishAffinity();
+        } else if (id == R.id.nav_profile) {
+            startActivity(new Intent(AdminShowOrderedProducts.this, SellerProfile.class));
         }
         return true;
     }

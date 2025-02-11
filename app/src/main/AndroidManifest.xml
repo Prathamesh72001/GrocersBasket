@@ -16,7 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.GrocerBasket">
-        <activity android:name=".UserReviews"></activity>
+        <activity android:name=".UserReviews" />
         <activity android:name=".Settings" />
         <activity android:name=".OrderDetails" />
         <activity android:name=".AdminShowOrderedProducts" />
@@ -54,7 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name="com.razorpay.CheckoutActivity" android:exported="true"/>
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
@@ -69,11 +69,14 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
 
-        <service android:name=".MyFirebaseMessaging">
+        <service android:name=".MyFirebaseMessaging"
+            android:exported="true">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
+
+        <receiver android:name="com.razorpay.RzpTokenReceiver" android:exported="true"/>
     </application>
 
 </manifest>

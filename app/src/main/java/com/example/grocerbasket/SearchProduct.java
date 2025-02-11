@@ -369,50 +369,38 @@ public class SearchProduct extends AppCompatActivity implements NavigationView.O
     //Navigation Func
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_home:
-                startActivity(new Intent(SearchProduct.this, Dashboard.class));
-                finishAffinity();
-                break;
+        int id=item.getItemId();
+        if(id==R.id.nav_home){
+            startActivity(new Intent(SearchProduct.this, Dashboard.class));
+            finishAffinity();
+        }else if(id==R.id.nav_profile){
+            Intent profile_intent;
+            if (forWhom.equalsIgnoreCase("forUser")) {
+                profile_intent = new Intent(SearchProduct.this, UserProfile.class);
+            } else {
+                profile_intent = new Intent(SearchProduct.this, SellerProfile.class);
+            }
+            startActivity(profile_intent);
+        }else if(id==R.id.nav_settings){
+            startActivity(new Intent(SearchProduct.this,Settings.class));
+        }else if(id==R.id.nav_logout){
+            SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_profile:
-                Intent profile_intent;
-                if (forWhom.equalsIgnoreCase("forUser")) {
-                    profile_intent = new Intent(SearchProduct.this, UserProfile.class);
-                } else {
-                    profile_intent = new Intent(SearchProduct.this, SellerProfile.class);
-                }
-                startActivity(profile_intent);
-                break;
+            SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
+            sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
 
-            case R.id.nav_settings:
-                startActivity(new Intent(SearchProduct.this,Settings.class));
-                break;
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(SearchProduct.this, Dashboard.class);
+            startActivity(logout_intent);
+            finishAffinity();
+        }else if(id==R.id.nav_category){
+            startActivity(new Intent(SearchProduct.this,Categories.class));
 
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
+        }else if(id==R.id.nav_basket){
+            startActivity(new Intent(SearchProduct.this,CartActivity.class));
 
-                SessionManager sessionManager2 = new SessionManager(this, SessionManager.SESSION_ADDRESS);
-                sessionManager2.creatingAddressSession("Swagath Rd-Tilaknagar,Banglore-560041");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(SearchProduct.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
-
-            case R.id.nav_category:
-                startActivity(new Intent(SearchProduct.this,Categories.class));
-                break;
-
-            case R.id.nav_aboutus:
-                break;
-
-            case R.id.nav_basket:
-                startActivity(new Intent(SearchProduct.this,CartActivity.class));
-                break;
         }
         return true;
     }

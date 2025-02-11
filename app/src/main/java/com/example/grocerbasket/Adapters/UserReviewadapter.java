@@ -80,223 +80,223 @@ public class UserReviewadapter extends RecyclerView.Adapter<UserReviewadapter.Us
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.copy:
-                                ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-                                ClipData clipData = ClipData.newPlainText("Data", review);
-                                clipboardManager.setPrimaryClip(clipData);
-                                Toast.makeText(context, "Review copied successfully", Toast.LENGTH_LONG).show();
+                        int id=item.getItemId();
+                        if(id==R.id.copy){
+                            ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clipData = ClipData.newPlainText("Data", review);
+                            clipboardManager.setPrimaryClip(clipData);
+                            Toast.makeText(context, "Review copied successfully", Toast.LENGTH_LONG).show();
 
-                                return true;
+                            return true;
+                        }
+                        else if(id==R.id.delete){
+                            FirebaseDatabase.getInstance().getReference("Product Reviews").child(pid).addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    long i = snapshot.getChildrenCount();
+                                    Toast.makeText(context, String.valueOf(i), Toast.LENGTH_LONG).show();
+                                    FirebaseDatabase.getInstance().getReference("Product Reviews").child(pid).orderByChild("timestamp").equalTo(timeStamp).addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                            if (i != 1) {
+                                                FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            float pRating = snapshot.child("rating").getValue(Float.class);
+                                                            float new_rating = (pRating * 2) - rating;
+                                                            //Toast.makeText(context, String.valueOf(new_rating), Toast.LENGTH_LONG).show();
 
-                            case R.id.delete:
-                                FirebaseDatabase.getInstance().getReference("Product Reviews").child(pid).addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                        long i = snapshot.getChildrenCount();
-                                        Toast.makeText(context, String.valueOf(i), Toast.LENGTH_LONG).show();
-                                        FirebaseDatabase.getInstance().getReference("Product Reviews").child(pid).orderByChild("timestamp").equalTo(timeStamp).addListenerForSingleValueEvent(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                if (i != 1) {
-                                                    FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                float pRating = snapshot.child("rating").getValue(Float.class);
-                                                                float new_rating = (pRating * 2) - rating;
-                                                                //Toast.makeText(context, String.valueOf(new_rating), Toast.LENGTH_LONG).show();
+                                                            DecimalFormat df = new DecimalFormat("#.#");
+                                                            String d = df.format(new_rating);
 
-                                                                DecimalFormat df = new DecimalFormat("#.#");
-                                                                String d = df.format(new_rating);
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).child("rating").setValue(Float.parseFloat(d));
 
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).child("rating").setValue(Float.parseFloat(d));
-
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if (snapshot.exists()) {
-                                                                            FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                                        }
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    if (snapshot.exists()) {
+                                                                        FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                                     }
+                                                                }
 
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
 
+                                                                }
+                                                            });
+
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    if (snapshot.exists()) {
+                                                                        FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                                     }
-                                                                });
+                                                                }
 
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if (snapshot.exists()) {
-                                                                            FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                                        }
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    if (snapshot.exists()) {
+                                                                        FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                                     }
+                                                                }
 
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
 
+                                                                }
+                                                            });
+
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    if (snapshot.exists()) {
+                                                                        FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).child("rating").setValue(Float.parseFloat(d));
                                                                     }
-                                                                });
+                                                                }
 
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if (snapshot.exists()) {
-                                                                            FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                                        }
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                                                }
+                                                            });
+
+                                                            FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                                @Override
+                                                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                                    if (snapshot.exists()) {
+                                                                        FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                                     }
+                                                                }
 
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
+                                                                @Override
+                                                                public void onCancelled(@NonNull DatabaseError error) {
 
-                                                                    }
-                                                                });
-
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if (snapshot.exists()) {
-                                                                            FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                                                    }
-                                                                });
-
-                                                                FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                                    @Override
-                                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                                        if (snapshot.exists()) {
-                                                                            FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                                        }
-                                                                    }
-
-                                                                    @Override
-                                                                    public void onCancelled(@NonNull DatabaseError error) {
-
-                                                                    }
-                                                                });
-
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                                }
+                                                            });
 
                                                         }
-                                                    });
-                                                } else {
-                                                    String d = "0.0";
-                                                    FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                            }
+                                                    }
+
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+                                            } else {
+                                                String d = "0.0";
+                                                FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("All Products").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                         }
+                                                    }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                                    }
+                                                });
+
+                                                FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                         }
-                                                    });
+                                                    }
 
-                                                    FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Top Offers").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                            }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+                                                FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                         }
+                                                    }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                                    }
+                                                });
+
+                                                FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                         }
-                                                    });
+                                                    }
 
-                                                    FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Trending").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                            }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                                    }
+                                                });
+
+                                                FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).child("rating").setValue(Float.parseFloat(d));
                                                         }
+                                                    }
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
 
+                                                    }
+                                                });
+
+                                                FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
+                                                    @Override
+                                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                        if (snapshot.exists()) {
+                                                            FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).child("rating").setValue(Float.parseFloat(d));
                                                         }
-                                                    });
+                                                    }
 
-                                                    FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Cart Products").child(reviewby).child("cartProdHelperClass").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                            }
-                                                        }
+                                                    @Override
+                                                    public void onCancelled(@NonNull DatabaseError error) {
 
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                                        }
-                                                    });
-
-                                                    FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                FirebaseDatabase.getInstance().getReference("Products").child("Favourite Products").child(reviewby).child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                                        }
-                                                    });
-
-                                                    FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                                        @Override
-                                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                                            if (snapshot.exists()) {
-                                                                FirebaseDatabase.getInstance().getReference("Orders").child(reviewby).child("Items").child(pid).child("rating").setValue(Float.parseFloat(d));
-                                                            }
-                                                        }
-
-                                                        @Override
-                                                        public void onCancelled(@NonNull DatabaseError error) {
-
-                                                        }
-                                                    });
-
-                                                }
-                                                FirebaseDatabase.getInstance().getReference("User Reviews").child(reviewby).child(timeStamp).removeValue();
-                                                FirebaseDatabase.getInstance().getReference("Product Reviews").child(pid).child(timeStamp).removeValue();
-                                                Toast.makeText(context, "Review removed successfully", Toast.LENGTH_LONG).show();
-                                            }
-
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError error) {
+                                                    }
+                                                });
 
                                             }
-                                        });
+                                            FirebaseDatabase.getInstance().getReference("User Reviews").child(reviewby).child(timeStamp).removeValue();
+                                            FirebaseDatabase.getInstance().getReference("Product Reviews").child(pid).child(timeStamp).removeValue();
+                                            Toast.makeText(context, "Review removed successfully", Toast.LENGTH_LONG).show();
+                                        }
+
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError error) {
+
+                                        }
+                                    });
 
 
-                                    }
+                                }
 
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError error) {
-                                        Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
-                                    }
-                                });
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                    Toast.makeText(context, error.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                         return false;
                     }

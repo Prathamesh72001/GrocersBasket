@@ -338,26 +338,21 @@ public class Admin_Show_Product extends AppCompatActivity implements NavigationV
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_add:
-                startActivity(new Intent(Admin_Show_Product.this,Admin_Add_Product.class));
-                finish();
-                break;
+        int id=item.getItemId();
+        if(id==R.id.nav_add){
+            startActivity(new Intent(Admin_Show_Product.this,Admin_Add_Product.class));
+            finish();
+        }else if(id==R.id.nav_home){
+            CloseDrawer();
+        }else if(id==R.id.nav_logout){
+            SessionManager sessionManager1 = new SessionManager(Admin_Show_Product.this, SessionManager.SESSION_FORWHO);
+            sessionManager1.creatingForWhomSession("forWho");
 
-            case R.id.nav_home:
-                CloseDrawer();
-                break;
-
-            case R.id.nav_logout:
-                SessionManager sessionManager1 = new SessionManager(Admin_Show_Product.this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
-
-                SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(Admin_Show_Product.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
-                break;
+            SessionManager sessionManager = new SessionManager(this, SessionManager.SESSION_USER);
+            sessionManager.logout();
+            Intent logout_intent = new Intent(Admin_Show_Product.this, Dashboard.class);
+            startActivity(logout_intent);
+            finishAffinity();
         }
         return true;
     }

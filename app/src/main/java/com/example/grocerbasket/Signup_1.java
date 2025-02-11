@@ -108,20 +108,17 @@ public class Signup_1 extends AppCompatActivity {
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.nav_user:
-                                signup_as_text.setText("User");
-                                shopname.setVisibility(View.GONE);
-                                delfee.setVisibility(View.GONE);
-                                loc.setVisibility(View.GONE);
-                                break;
-
-                            case R.id.nav_seller:
-                                signup_as_text.setText("Seller");
-                                shopname.setVisibility(View.VISIBLE);
-                                delfee.setVisibility(View.VISIBLE);
-                                loc.setVisibility(View.VISIBLE);
-                                break;
+                        int id=item.getItemId();
+                        if(id==R.id.nav_user){
+                            signup_as_text.setText("User");
+                            shopname.setVisibility(View.GONE);
+                            delfee.setVisibility(View.GONE);
+                            loc.setVisibility(View.GONE);
+                        }else if(id==R.id.nav_seller){
+                            signup_as_text.setText("Seller");
+                            shopname.setVisibility(View.VISIBLE);
+                            delfee.setVisibility(View.VISIBLE);
+                            loc.setVisibility(View.VISIBLE);
                         }
                         return false;
                     }

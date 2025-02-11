@@ -4,13 +4,14 @@ plugins {
 }
 
 android {
-    compileSdkVersion 30
+    namespace "com.example.grocerbasket"
+    compileSdkVersion 34
     buildToolsVersion "30.0.3"
 
     defaultConfig {
         applicationId "com.example.grocerbasket"
         minSdkVersion 23
-        targetSdkVersion 30
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
 
