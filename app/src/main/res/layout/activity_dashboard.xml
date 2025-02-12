@@ -586,6 +586,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/biscuits_view_more"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -599,10 +600,13 @@
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/BiscuitsRV"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="15dp">
-
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/product_layout_user">
                     </androidx.recyclerview.widget.RecyclerView>
 
                     <RelativeLayout
@@ -629,6 +633,7 @@
                             android:textSize="10sp" />
 
                         <TextView
+                            android:id="@+id/breakfast_dairy_view_more"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentRight="true"
@@ -642,9 +647,13 @@
                     </RelativeLayout>
 
                     <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/Butter_cheese_milkRV"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="15dp">
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/product_layout_user">
 
                     </androidx.recyclerview.widget.RecyclerView>
 

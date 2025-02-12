@@ -215,6 +215,7 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsAdapter
         RelativeLayout nextBtn = view.findViewById(R.id.Nextbtn);
         ImageView take = view.findViewById(R.id.bookimage1);
         ImageView del = view.findViewById(R.id.bookimage2);
+        ImageView backBtn = view.findViewById(R.id.backbtn);
 
         //showDialogue
         bottomSheetDialog.show();
@@ -367,6 +368,9 @@ public class ShopsAdapter extends RecyclerView.Adapter<ShopsAdapter.ShopsAdapter
             }
         });
 
+        backBtn.setOnClickListener(v -> {
+            bottomSheetDialog.dismiss();
+        });
     }
 
     private void submitOrder(String shopphone, String finalcost, String delOp, String payOp) {

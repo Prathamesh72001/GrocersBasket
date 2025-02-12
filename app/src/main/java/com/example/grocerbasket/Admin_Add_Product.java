@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -49,14 +50,24 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DataFormatter;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Admin_Add_Product extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
-    ImageView prodImg,menu,removeme;
+    ImageView prodImg,menu,uploadExcel;
     RelativeLayout addProd, progressBar,contentView;
     TextInputLayout prodName, prodDesc,prodDescDetailed,prodQuantity, price, discount, discountPrice;
     TextInputEditText discountEditText,priceEditText;
@@ -93,7 +104,7 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
         drawerLayout = findViewById(R.id.drawerlayout);
         navigationView=findViewById(R.id.navigation_view);
         menu=findViewById(R.id.menu);
-        removeme=findViewById(R.id.Removeme);
+        uploadExcel=findViewById(R.id.UploadExcel);
         discountEditText=findViewById(R.id.editText);
         priceEditText=findViewById(R.id.editText2);
         isInStock=findViewById(R.id.isInStock);
@@ -218,17 +229,10 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
             }
         });
 
-        removeme.setOnClickListener(new View.OnClickListener() {
+        uploadExcel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SessionManager sessionManager1 = new SessionManager(Admin_Add_Product.this, SessionManager.SESSION_FORWHO);
-                sessionManager1.creatingForWhomSession("forWho");
-
-                SessionManager sessionManager = new SessionManager(Admin_Add_Product.this, SessionManager.SESSION_ADMIN);
-                sessionManager.logout();
-                Intent logout_intent = new Intent(Admin_Add_Product.this, Dashboard.class);
-                startActivity(logout_intent);
-                finishAffinity();
+                pickExcelFile();
             }
         });
 
@@ -292,6 +296,13 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
         //Animations
         drawerAnim();
 
+    }
+
+    private void pickExcelFile() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"); // XLSX format
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        startActivityForResult(intent, 100);
     }
 
     private void CloseDrawer() {
@@ -616,8 +627,70 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
                 image_uri=data.getData();
                 prodImg.setImageURI(image_uri);
             }
+            if (requestCode == 100) {
+                Uri uri = data.getData();
+                if (uri != null) {
+                    readExcelFile(uri);
+                }
+            }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void readExcelFile(Uri uri) {
+        //Progress
+        progressBar.setVisibility(View.VISIBLE);
+        try {
+            InputStream inputStream = getContentResolver().openInputStream(uri);
+            XSSFWorkbook workbook = new XSSFWorkbook(inputStream);
+            XSSFSheet sheet = workbook.getSheetAt(0); // Read first sheet
+
+            List<ProductHelperClass> dataList = new ArrayList<>();
+
+            for (Row row : sheet) {
+                final String timeStamp=""+System.currentTimeMillis();
+
+                ProductHelperClass prod= new ProductHelperClass(timeStamp,
+                        getCellValue(row.getCell(0)),getCellValue(row.getCell(1)),getCellValue(row.getCell(2)),
+                        getCellValue(row.getCell(3)),getCellValue(row.getCell(4)),getCellValue(row.getCell(5)),""
+                        ,getCellValue(row.getCell(6)),Float.parseFloat(getCellValue(row.getCell(7))),timeStamp,getCellValue(row.getCell(8)),
+                        getCellValue(row.getCell(9)),getCellValue(row.getCell(10)),getCellValue(row.getCell(11))
+                );
+                dataList.add(prod);
+            }
+
+            workbook.close();
+            inputStream.close();
+
+            if(!dataList.isEmpty()) {
+                FirebaseDatabase rootnode = FirebaseDatabase.getInstance();
+                DatabaseReference reference = rootnode.getReference("Products");
+                for (int i = 0; i < dataList.size(); i++) {
+                    reference.child("All Products").child(dataList.get(i).getProdid()).setValue(dataList.get(i)).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            Log.e("Error","Success");
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.e("Error1",e.getMessage());
+                        }
+                    });
+                }
+                Toast.makeText(Admin_Add_Product.this,"Successfully uploaded data",Toast.LENGTH_LONG).show();
+
+            }else{
+                Toast.makeText(Admin_Add_Product.this,"Empty or Incorrect Excel Sheet",Toast.LENGTH_LONG).show();
+            }
+            //Progress
+            progressBar.setVisibility(View.GONE);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e("Error2",e.toString());
+            //Progress
+            progressBar.setVisibility(View.GONE);
+        }
     }
 
     private boolean isConnectedToInternet(Admin_Add_Product userProfile) {
@@ -653,5 +726,10 @@ public class Admin_Add_Product extends AppCompatActivity implements NavigationVi
             finishAffinity();
         }
         return true;
+    }
+
+    public String getCellValue(Cell cell) {
+        DataFormatter formatter = new DataFormatter();
+        return formatter.formatCellValue(cell); // Converts numeric values to string properly
     }
 }

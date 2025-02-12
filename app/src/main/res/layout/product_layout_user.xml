@@ -199,6 +199,8 @@
                 android:text="Product Name"
                 android:textSize="13sp"
                 android:textAllCaps="true"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/black" />
 
             <RelativeLayout

@@ -59,7 +59,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    RecyclerView TopOffersRecycler, TrendingRecycler, FoodgrainRV;
+    RecyclerView TopOffersRecycler, TrendingRecycler, FoodgrainRV, BiscuitsRV, BreakfastRV;
     RecyclerView.Adapter adapter;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -73,9 +73,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     static final float END_SCALE = 0.7f;
     ImageView menu, add, profile;
     TextView header_text, header_userLoctext, cartText, priceText, orgpriceText, viewCart,top_viewMore,trend_viewMore
-            ,foodgrain_viewmore;
+            ,foodgrain_viewmore, biscuits_viewmore, breakfast_dairy_viewmore;
     SessionManager UsersessionManager;
-    ArrayList<ProductHelperClass> productHelperClass1, productHelperClass2, productHelperClass3;
+    ArrayList<ProductHelperClass> productHelperClass1, productHelperClass2, productHelperClass3, productHelperClass4, productHelperClass5;
 
 
     @Override
@@ -95,6 +95,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         TopOffersRecycler = findViewById(R.id.TopOffersRV);
         TrendingRecycler = findViewById(R.id.trendingRV);
         FoodgrainRV = findViewById(R.id.Foodgrain_oil_masalaRV);
+        BiscuitsRV = findViewById(R.id.BiscuitsRV);
+        BreakfastRV = findViewById(R.id.Butter_cheese_milkRV);
         nestedScrollView = findViewById(R.id.nested_scroll);
         cartInfoRl = findViewById(R.id.cart_barRl);
         cartText = findViewById(R.id.quantity_txt);
@@ -116,6 +118,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         top_viewMore=findViewById(R.id.top_offers_viewmore);
         trend_viewMore=findViewById(R.id.trending_view_more);
         foodgrain_viewmore=findViewById(R.id.foodgrain_viewmore);
+        biscuits_viewmore=findViewById(R.id.biscuits_view_more);
+        breakfast_dairy_viewmore=findViewById(R.id.breakfast_dairy_view_more);
 
         Searchbar=findViewById(R.id.SearchBar);
         cartInfoView=findViewById(R.id.cartInfoView);
@@ -124,6 +128,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         TopOffersRecycler();
         TrendingRecycler();
         FoodgrainRecycler();
+        BiscuitsRecycler();
+        BreakfastRecycler();
 
         //CheckInternetConnection
         if (!isConnectedToInternet(this)) {
@@ -418,6 +424,33 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(intent);
             }
         });
+
+        biscuits_viewmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Dashboard.this,SubCategories.class);
+                intent.putExtra("catName","Snacks");
+                startActivity(intent);
+            }
+        });
+
+        breakfast_dairy_viewmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Dashboard.this,SubCategories.class);
+                intent.putExtra("catName","Bakery");
+                startActivity(intent);
+            }
+        });
+
+        foodgrain_viewmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Dashboard.this,SubCategories.class);
+                intent.putExtra("catName","Foodgrain");
+                startActivity(intent);
+            }
+        });
     }
 
     private void FoodgrainRecycler() {
@@ -434,6 +467,52 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 }
                 adapter = new ProductAdapter_Dashboard(Dashboard.this, productHelperClass3);
                 FoodgrainRV.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void BiscuitsRecycler() {
+        productHelperClass4 = new ArrayList<>();
+        //get All Products
+        FirebaseDatabase.getInstance().getReference("Products").child("All Products").orderByChild("cat").equalTo("Snacks & Branded Foods").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productHelperClass4.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    ProductHelperClass productHelperClass = ds.getValue(ProductHelperClass.class);
+                    productHelperClass4.add(productHelperClass);
+                }
+                adapter = new ProductAdapter_Dashboard(Dashboard.this, productHelperClass4);
+                BiscuitsRV.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    private void BreakfastRecycler() {
+        productHelperClass5 = new ArrayList<>();
+        //get All Products
+        FirebaseDatabase.getInstance().getReference("Products").child("All Products").orderByChild("cat").equalTo("Bakery, Cakes & Dairy").addValueEventListener(new ValueEventListener() {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                productHelperClass5.clear();
+                for (DataSnapshot ds : snapshot.getChildren()) {
+                    ProductHelperClass productHelperClass = ds.getValue(ProductHelperClass.class);
+                    productHelperClass5.add(productHelperClass);
+                }
+                adapter = new ProductAdapter_Dashboard(Dashboard.this, productHelperClass5);
+                BreakfastRV.setAdapter(adapter);
             }
 
             @Override

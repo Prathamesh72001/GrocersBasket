@@ -119,6 +119,8 @@
                 android:fontFamily="@font/baloo"
                 android:lineSpacingExtra="-7.5dp"
                 android:text="Product Description"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textSize="12sp"
                 />
 

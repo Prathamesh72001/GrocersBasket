@@ -49,12 +49,12 @@
                 android:src="@drawable/logoname" />
 
             <ImageView
-                android:id="@+id/Removeme"
+                android:id="@+id/UploadExcel"
                 android:layout_width="22.5dp"
                 android:layout_height="22.5dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/removeme"
+                android:src="@drawable/upload"
 
                 />
 

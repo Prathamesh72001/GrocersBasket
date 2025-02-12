@@ -83,7 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductA
         holder.prodRating.setRating(rating);
         holder.productPrice.setText(price);
         holder.prodQuantity.setText(quantity);
-        holder.discount.setText(discount);
+        holder.discount.setText(discount + "%");
         holder.discountPrice.setText(discountprice);
         if(isdiscountavailable.equalsIgnoreCase("true")) {
             holder.discountPriceRl.setVisibility(View.VISIBLE);
@@ -207,13 +207,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductA
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                                 deleteProduct(id);
-
+                                bottomSheetDialog.dismiss();
                             }
                         })
                         .setNegativeButton("No", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
+
                             }
                         }).show();
             }

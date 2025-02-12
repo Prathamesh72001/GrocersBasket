@@ -39,11 +39,16 @@
 
         <TextView
             android:id="@+id/prodname"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:fontFamily="@font/bungee"
             android:text="Product Name"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="50dp"
+            android:textAlignment="center"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:textColor="@color/black"
             android:textSize="17.5sp" />
     </RelativeLayout>
@@ -115,6 +120,8 @@
                 android:layout_toRightOf="@id/det_desc"
                 android:fontFamily="@font/baloo"
                 android:text="Description"
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
         </RelativeLayout>
@@ -140,6 +147,8 @@
                 android:layout_toRightOf="@id/det_desc_detailed"
                 android:fontFamily="@font/baloo"
                 android:text="Description"
+                android:maxLines="2"
+                android:ellipsize="end"
                 android:textColor="@color/grey"
                 android:textSize="13sp" />
         </RelativeLayout>
